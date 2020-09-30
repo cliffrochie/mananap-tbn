@@ -108,9 +108,34 @@ Once the program starts, it will automatically created the database tables</p>
     <td width="40%">Retrieve specific event</td>
   </tr>
   <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/events/{id}/unassigned-judges</code></strong></td>
+    <td width="40%">Retrieve judges that is not assigned to the specific event</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/events/{id}/unassigned-participants</code></strong></td>
+    <td width="40%">Retrieve participants that is not assigned to the specific event</td>
+  </tr>
+  <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events</code></strong></td>
     <td width="40%">Create new event</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/events/{id}/add-judge</code></strong></td>
+    <td width="40%">Insert new judge assigned to the specific event</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/events/{id}/add-participant</code></strong></td>
+    <td width="40%">Insert new participant assigned to the specific event</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/events/delete</code></strong></td>
+    <td width="40%">Delete multiple events</td>
   </tr>
   <tr>
     <td>PUT</td>
@@ -121,5 +146,45 @@ Once the program starts, it will automatically created the database tables</p>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
     <td width="40%">Delete specific event</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="50%"><strong><code>/api/events/{id}/delete-judge/{judge_id}</code></strong></td>
+    <td width="40%">Delete a specific assigned judge from the specific event</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="50%"><strong><code>/api/events/{id}/delete-participant/{participant_id}</code></strong></td>
+    <td width="40%">Delete a specific assigned participant from the specific event</td>
+  </tr>
+</table>
+<br/>
+
+<h4>Event Criterias</h4>
+<table>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/events/{id}/criterias</code></strong></td>
+    <td width="40%">Retrieve all criterias that is set to the specific event</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/events/{id}/criterias/{criteria_id}</code></strong></td>
+    <td width="40%">Retrieve a specific criteria that is set to the specific event</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/events/{id}/criterias</code></strong></td>
+    <td width="40%">Create new criteria to the specific event</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td width="50%"><strong><code>/api/events/{id}/criterias/{criteria_id}</code></strong></td>
+    <td width="40%">Update specific criteria from the specific event</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="50%"><strong><code>/api/events/{id}/criterias/{criteria_id}</code></strong></td>
+    <td width="40%">Delete specific criteria from the specific event</td>
   </tr>
 </table>
