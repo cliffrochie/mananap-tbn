@@ -197,7 +197,7 @@ def delete_participant_from_event(current_user, id, participant_id):
 
 """
 +--------------------------------------------------------------------------
-| Criteria routes
+| Event Criteria routes
 +--------------------------------------------------------------------------
 | Below are the routes related to criterias.
 |
@@ -721,5 +721,5 @@ def delete_event_score(current_user, id):
 
     if is_judge(current_user):
         return jsonify(unauthorized_access()), 401
-        
+
     return EventScoreController.delete(id)
