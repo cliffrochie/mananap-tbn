@@ -10,6 +10,7 @@ db = SQLAlchemy()
 
 def create_app():
     # Routes
+    from tabulation.routes.auth_routes import auth
     from tabulation.routes.main_routes import main
     from tabulation.routes.generate_data.data_routes import data
 
@@ -19,6 +20,7 @@ def create_app():
         create_database('mysql://root@localhost/tabulation')
 
     # Register routes
+    app.register_blueprint(auth, url_prefix='/api')
     app.register_blueprint(main, url_prefix='/api')
     app.register_blueprint(data, url_prefix='/api/data')
 

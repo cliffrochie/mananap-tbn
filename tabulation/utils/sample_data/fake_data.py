@@ -1,6 +1,8 @@
 from tabulation import db
 from tabulation.models.db import *
 
+from werkzeug.security import generate_password_hash
+
 from sqlalchemy.sql.expression import func
 from faker import Faker
 import random
@@ -133,7 +135,7 @@ def generate_users():
                 user = User(
                     profile['username'],
                     profile['mail'],
-                    'password',
+                    generate_password_hash('password'),
                     profile['name'].split()[0],
                     '',
                     profile['name'].split()[1],

@@ -21,8 +21,6 @@ main = Blueprint('main', __name__)
 def ping():
     return jsonify({})
 
-
-
 """
 +--------------------------------------------------------------------------
 | User routes
@@ -32,26 +30,51 @@ def ping():
 """
 # Get routes
 @main.route('/users', methods=['GET'])
-def get_users():
+@token_required(allowed_guest=False)
+def get_users(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return UserController.all()
 
 @main.route('/users/<id>', methods=['GET'])
-def get_user(id):
+@token_required(allowed_guest=False)
+def get_user(current_user, id):
+    
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return UserController.find(id)
 
 # Post routes
 @main.route('/users', methods=['POST'])
-def create_user():
+@token_required(allowed_guest=False)
+def create_user(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return UserController.create()
 
 # Put routes
 @main.route('/users/<id>', methods=['PUT'])
-def update_user(id):
+@token_required(allowed_guest=False)
+def update_user(current_user, id):
+    
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return UserController.update(id)
 
 # Delete routes
 @main.route('/users/<id>', methods=['DELETE'])
-def delete_user(id):
+@token_required(allowed_guest=False)
+def delete_user(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return UserController.delete(id)
 
 
@@ -66,59 +89,108 @@ def delete_user(id):
 
 # Get routes
 @main.route('/events', methods=['GET'])
-def get_events():
+@token_required(allowed_guest=True)
+def get_events(current_user):
     return EventController.all()
 
 @main.route('/events/<id>', methods=['GET'])
-def get_event(id):
+@token_required(allowed_guest=True)
+def get_event(current_user, id):
     return EventController.find(id)
 
 @main.route('/events/<id>/unassigned-judges', methods=['GET'])
-def get_unassigned_judges_from_event(id):
+@token_required(allowed_guest=True)
+def get_unassigned_judges_from_event(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.get_unassigned_judges(id)
 
 @main.route('/events/<id>/find-judge/<judge_id>', methods=['GET'])
-def get_judge_from_event(id, judge_id):
+@token_required(allowed_guest=True)
+def get_judge_from_event(current_user, id, judge_id):
     return EventController.find_judge(id, judge_id)
 
 @main.route('/events/<id>/unassigned-participants', methods=['GET'])
-def get_unassigned_participants_from_event(id):
+@token_required(allowed_guest=True)
+def get_unassigned_participants_from_event(current_user, id):
     return EventController.get_unassigned_participants(id)
 
 # Post routes
 @main.route('/events', methods=['POST'])
-def create_event():
+@token_required(allowed_guest=False)
+def create_event(current_user):
+    
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.create()
 
 @main.route('/events/<id>/add-judge', methods=['POST'])
-def add_judge_from_event(id):
+@token_required(allowed_guest=False)
+def add_judge_from_event(current_user, id):
+    
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.add_judge(id)
 
 @main.route('/events/<id>/add-participant', methods=['POST'])
-def add_participant_from_event(id):
+@token_required(allowed_guest=False)
+def add_participant_from_event(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+        
     return EventController.add_participant(id)
 
 @main.route('/events/delete', methods=['POST'])
-def delete_multiple_events():
+@token_required(allowed_guest=False)
+def delete_multiple_events(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.delete_multiple()
 
 
 # Put routes
 @main.route('/events/<id>', methods=['PUT'])
-def update_event(id):
+@token_required(allowed_guest=False)
+def update_event(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.update(id)
 
 # Delete routes
 @main.route('/events/<id>', methods=['DELETE'])
-def delete_event(id):
+@token_required(allowed_guest=False)
+def delete_event(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.delete(id)
 
 @main.route('/events/<id>/delete-judge/<judge_id>', methods=['DELETE'])
-def delete_judge_from_event(id, judge_id):
+@token_required(allowed_guest=False)
+def delete_judge_from_event(current_user, id, judge_id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.delete_judge(id, judge_id)
 
 @main.route('/events/<id>/delete-participant/<participant_id>', methods=['DELETE'])
-def delete_participant_from_event(id, participant_id):
+@token_required(allowed_guest=False)
+def delete_participant_from_event(current_user, id, participant_id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventController.delete_participant(id, participant_id)
 
 
@@ -132,26 +204,31 @@ def delete_participant_from_event(id, participant_id):
 """
 # Get routes
 @main.route('/events/<event_id>/criterias', methods=['GET'])
-def get_criterias(event_id):
+@token_required(allowed_guest=True)
+def get_criterias(current_user, event_id):
     return CriteriaController.all(event_id)
 
 @main.route('/events/<event_id>/criterias/<criteria_id>', methods=['GET'])
-def get_criteria(event_id, criteria_id):
+@token_required(allowed_guest=True)
+def get_criteria(current_user, event_id, criteria_id):
     return CriteriaController.find(event_id, criteria_id)
 
 # Post routes
 @main.route('/events/<event_id>/criterias', methods=['POST'])
-def create_criteria(event_id):
+@token_required(allowed_guest=False)
+def create_criteria(current_user, event_id):
     return CriteriaController.create(event_id)
 
 # Put routes
 @main.route('/events/<event_id>/criterias/<criteria_id>', methods=['PUT'])
-def update_criteria(event_id, criteria_id):
+@token_required(allowed_guest=False)
+def update_criteria(current_user, event_id, criteria_id):
     return CriteriaController.update(event_id, criteria_id)
 
 # Delete routes
 @main.route('/events/<event_id>/criterias/<criteria_id>', methods=['DELETE'])
-def delete_criteria(event_id, criteria_id):
+@token_required(allowed_guest=False)
+def delete_criteria(current_user, event_id, criteria_id):
     return CriteriaController.delete(event_id, criteria_id)
 
 
@@ -165,21 +242,33 @@ def delete_criteria(event_id, criteria_id):
 """
 # Get routes
 @main.route('/judges', methods=['GET'])
-def get_judges():
+@token_required(allowed_guest=True)
+def get_judges(current_user):
     return JudgeController.all()
 
 @main.route('/judges/<id>', methods=['GET'])
-def get_judge(id):
+@token_required(allowed_guest=True)
+def get_judge(current_user, id):
     return JudgeController.find(id)
 
 # Post routes
 @main.route('/judges', methods=['POST'])
-def create_judge():
+@token_required(allowed_guest=False)
+def create_judge(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return JudgeController.create()
 
 # Delete routes
 @main.route('/judges/<id>', methods=['DELETE'])
-def delete_judge(id):
+@token_required(allowed_guest=False)
+def delete_judge(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return JudgeController.delete(id)
 
 
@@ -193,26 +282,31 @@ def delete_judge(id):
 """
 # Get routes
 @main.route('/participants', methods=['GET'])
-def get_participants():
+@token_required(allowed_guest=True)
+def get_participants(current_user):
     return ParticipantController.all()
 
 @main.route('/participants/<id>', methods=['GET'])
-def get_participant(id):
+@token_required(allowed_guest=True)
+def get_participant(current_user, id):
     return ParticipantController.find(id)
 
 # Post routes
 @main.route('/participants', methods=['POST'])
-def create_participant():
+@token_required(allowed_guest=False)
+def create_participant(current_user):
     return ParticipantController.create()
 
 # Put routes
 @main.route('/participants/<id>', methods=['PUT'])
-def update_participant(id):
+@token_required(allowed_guest=False)
+def update_participant(current_user, id):
     return ParticipantController.update(id)
 
 # Delete routes
 @main.route('/participants/<id>', methods=['DELETE'])
-def delete_participant(id):
+@token_required(allowed_guest=False)
+def delete_participant(current_user, id):
     return ParticipantController.delete(id)
 
 
@@ -226,26 +320,51 @@ def delete_participant(id):
 """
 # Get routes
 @main.route('/roles', methods=['GET'])
-def get_roles():
+@token_required(allowed_guest=False)
+def get_roles(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return RoleController.all()
 
 @main.route('/roles/<id>', methods=['GET'])
-def get_role(id):
+@token_required(allowed_guest=False)
+def get_role(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return RoleController.find(id)
 
 # Post routes
 @main.route('/roles', methods=['POST'])
-def create_role():
+@token_required(allowed_guest=False)
+def create_role(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return RoleController.create()
 
 # Put routes
 @main.route('/roles/<id>', methods=['PUT'])
-def update_role(id):
+@token_required(allowed_guest=False)
+def update_role(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return RoleController.update(id)
 
 # Delete routes
 @main.route('/roles/<id>', methods=['DELETE'])
-def delete_role(id):
+@token_required(allowed_guest=False)
+def delete_role(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return RoleController.delete(id)
 
 
@@ -259,26 +378,51 @@ def delete_role(id):
 """
 # Get routes
 @main.route('/organizations', methods=['GET'])
-def get_organizations():
+@token_required(allowed_guest=False)
+def get_organizations(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationController.all()
 
 @main.route('/organizations/<id>', methods=['GET'])
-def get_organization(id):
+@token_required(allowed_guest=False)
+def get_organization(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationController.find(id)
 
 # Post routes
 @main.route('/organizations', methods=['POST'])
-def create_organization():
+@token_required(allowed_guest=False)
+def create_organization(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationController.create()
 
 # Put routes
 @main.route('/organizations/<id>', methods=['PUT'])
-def update_organization(id):
+@token_required(allowed_guest=False)
+def update_organization(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationController.update(id)
 
 # Delete routes
 @main.route('/organizations/<id>', methods=['DELETE'])
-def delete_organization(id):
+@token_required(allowed_guest=False)
+def delete_organization(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationController.delete(id)
 
 
@@ -292,26 +436,51 @@ def delete_organization(id):
 """
 # Get routes
 @main.route('/organization-types', methods=['GET'])
-def get_organization_types():
+@token_required(allowed_guest=False)
+def get_organization_types(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationTypeController.all()
 
 @main.route('/organization-types/<id>', methods=['GET'])
-def get_organization_type(id):
+@token_required(allowed_guest=False)
+def get_organization_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationTypeController.find(id)
 
 # Post routes
 @main.route('/organization-types', methods=['POST'])
-def create_organization_type():
+@token_required(allowed_guest=False)
+def create_organization_type(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationTypeController.create()
 
 # Put routes
 @main.route('/organization-types/<id>', methods=['PUT'])
-def update_organization_type(id):
+@token_required(allowed_guest=False)
+def update_organization_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationTypeController.update(id)
 
 # Delete routes
 @main.route('/organization-types/<id>', methods=['DELETE'])
-def delete_organization_type(id):
+@token_required(allowed_guest=False)
+def delete_organization_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return OrganizationTypeController.delete(id)
 
 
@@ -325,30 +494,60 @@ def delete_organization_type(id):
 """
 # Get routes
 @main.route('/event-types', methods=['GET'])
-def get_event_types():
+@token_required(allowed_guest=False)
+def get_event_types(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.all()
 
 @main.route('/event-types/<id>', methods=['GET'])
-def get_event_type(id):
+@token_required(allowed_guest=False)
+def get_event_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.find(id)
 
 # Post routes
 @main.route('/event-types', methods=['POST'])
-def create_event_type():
+@token_required(allowed_guest=False)
+def create_event_type(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.create()
 
 @main.route('/event-types/delete', methods=['POST'])
-def delete_multiple_event_types():
+@token_required(allowed_guest=False)
+def delete_multiple_event_types(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.delete_multiple()
 
 # Put routes
 @main.route('/event-types/<id>', methods=['PUT'])
-def update_event_type(id):
+@token_required(allowed_guest=False)
+def update_event_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.update(id)
 
 # Delete routes
 @main.route('/event-types/<id>', methods=['DELETE'])
-def delete_event_type(id):
+@token_required(allowed_guest=False)
+def delete_event_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventTypeController.delete(id)
 
 
@@ -362,26 +561,51 @@ def delete_event_type(id):
 """
 # Get routes
 @main.route('/participant-teams', methods=['GET'])
-def get_participant_teams():
+@token_required(allowed_guest=False)
+def get_participant_teams(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTeamController.all()
 
 @main.route('/participant-teams/<id>', methods=['GET'])
-def get_participant_team(id):
+@token_required(allowed_guest=False)
+def get_participant_team(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTeamController.find(id)
 
 # Post routes
 @main.route('/participant-teams', methods=['POST'])
-def create_participant_team():
+@token_required(allowed_guest=False)
+def create_participant_team(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTeamController.create()
 
 # Put routes
 @main.route('/participant-teams/<id>', methods=['PUT'])
-def update_participant_team(id):
+@token_required(allowed_guest=False)
+def update_participant_team(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTeamController.update(id)
 
 # Delete routes
 @main.route('/participant-teams/<id>', methods=['DELETE'])
-def delete_participant_team(id):
+@token_required(allowed_guest=False)
+def delete_participant_team(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTeamController.delete(id)
 
 
@@ -395,26 +619,51 @@ def delete_participant_team(id):
 """
 # Get routes
 @main.route('/participant-types', methods=['GET'])
-def get_participant_types():
+@token_required(allowed_guest=False)
+def get_participant_types(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTypeController.all()
 
 @main.route('/participant-types/<id>', methods=['GET'])
-def get_participant_type(id):
+@token_required(allowed_guest=False)
+def get_participant_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTypeController.find(id)
 
 # Post routes
 @main.route('/participant-types', methods=['POST'])
-def create_participant_type():
+@token_required(allowed_guest=False)
+def create_participant_type(current_user):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTypeController.create()
 
 # Put routes
 @main.route('/participant-types/<id>', methods=['PUT'])
-def update_participant_type(id):
+@token_required(allowed_guest=False)
+def update_participant_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTypeController.update(id)
 
 # Delete routes
 @main.route('/participant-types/<id>', methods=['DELETE'])
-def delete_participant_type(id):
+@token_required(allowed_guest=False)
+def delete_participant_type(current_user, id):
+
+    if is_admin(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return ParticipantTypeController.delete(id)
 
 
@@ -428,24 +677,49 @@ def delete_participant_type(id):
 """
 # Get routes
 @main.route('/event-scores', methods=['GET'])
-def get_event_scores():
+@token_required(allowed_guest=False)
+def get_event_scores(current_user):
+
+    if is_judge(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventScoreController.all()
 
 @main.route('/event-scores/<id>', methods=['GET'])
-def get_event_score(id):
+@token_required(allowed_guest=False)
+def get_event_score(current_user, id):
+
+    if is_judge(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventScoreController.find(id)
 
 # Post routes
 @main.route('/event-scores', methods=['POST'])
-def create_event_score():
+@token_required(allowed_guest=False)
+def create_event_score(current_user):
+
+    if is_judge(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventScoreController.create()
 
 # Put routes
 @main.route('/event-scores/<id>', methods=['PUT'])
-def update_event_score(id):
+@token_required(allowed_guest=False)
+def update_event_score(current_user, id):
+
+    if is_judge(current_user):
+        return jsonify(unauthorized_access()), 401
+
     return EventScoreController.update(id)
 
 # Delete routes
 @main.route('/event-scores/<id>', methods=['DELETE'])
-def delete_event_score(id):
+@token_required(allowed_guest=False)
+def delete_event_score(current_user, id):
+
+    if is_judge(current_user):
+        return jsonify(unauthorized_access()), 401
+        
     return EventScoreController.delete(id)

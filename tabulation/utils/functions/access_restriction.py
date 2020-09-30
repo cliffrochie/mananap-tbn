@@ -12,20 +12,20 @@ def token_required(allowed_guest):
             token = None
 
             if 'x-access-token' in request.headers:
-                token = request.headers['x-token-access']
+                token = request.headers['x-access-token']
 
             if not token and not allowed_guest:
                 response = {
                     'status': 'failed',
-                    'message': 'Token is missing'
+                    'message': 'Token is missing.'
                 }
                 return jsonify(response), 401
 
             try:
 
                 data = jwt.decode(token, SECRET_KEY)
-                current_user = User.query.get(data['id'])
-
+                current_user = User.query.get(data['public_id'])
+                
                 if not current_user:
                     current_user = None
 
@@ -34,14 +34,14 @@ def token_required(allowed_guest):
                 if not allowed_guest:
                     response = {
                         'status': 'failed',
-                        'message': 'Token is missing'
+                        'message': 'Token is missing.'
                     }
                     return jsonify(response), 401
 
                 current_user = None
             
             return f(current_user, *args, **kwargs)
-        wrapper.__name__ = f.__name___
+        wrapper.__name__ = f.__name__
         return wrapper
     return decorator
 
@@ -56,3 +56,18 @@ def is_admin(current_user):
     if role.code == 1:
         return True
     return False
+
+
+def is_judge(current_user):
+    if not current_user:
+        return False
+    
+    role = Role.query.get(current_user.role_id)
+
+    if role.code == 3:
+        return True
+    return False
+
+
+def unauthorized_access():
+    return {'status': 'failed', 'message': 'Unauthorized access.'}
