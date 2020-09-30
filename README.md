@@ -21,6 +21,8 @@
   <li><h4>sqlalchemy</h4> - it is an ORM, the purpose of this module to this project is to use its exception module.</li>
   <li><h4>sqlalchemy_utils</h4> - a helper tool to handle database, table creation</li>
   <li><h4>faker</h4> - a helper tool that generates informative random strings that is useful to populate data to the database</li>
+  <li><h4>pytest</h4> - a tool that can easily test the project</li>
+  <li><h4>mysql-connector</h4> - a tool used in testing outside of flask</li>
   <li><h4>PyJWT</h4> - to use json web token feature in auth.</li>
 </ul>
 
