@@ -1,0 +1,8 @@
+SECRET_KEY='si83jdDnwj!_ewijW4A12'
+SQLALCHEMY_DATABASE_URI='mysql://root:@localhost/tabulation'
+SQLALCHEMY_TRACK_MODIFICATIONS=True
+CORS_HEADERS='Content-Type'
+CORS_SUPPORTS_CREDENTIALS=True
+ENV='development'
+DEBUG=True
+TEST=True
