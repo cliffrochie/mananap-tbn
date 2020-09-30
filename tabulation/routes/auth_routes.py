@@ -50,3 +50,39 @@ def guest():
         'token': token.decode('UTF-8')
     }
     return jsonify(response)
+
+
+@auth.route('/register', methods=['POST'])
+def register():
+    data = request.get_json()
+
+    if data['confirm_password']:
+        if data['password'] != data['confirm_password']:
+            response = {
+                'status': 'failed',
+                'message': 'Password does not match.'
+            }
+
+            return jsonify(response), 400
+
+    user = User(
+        data['username'],
+        data['email'],
+        generate_password_hash(data['password']),
+        data['firstname'],
+        data['middlename'],
+        data['lastname'],
+        data['role_id'],
+        data['organization_id']
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+
+    response = {
+        'status': 'success',
+        'message': 'User created successfully.'
+    }
+
+    return jsonify(response), 201
