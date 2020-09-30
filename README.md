@@ -49,18 +49,18 @@ Once the program starts, it will automatically created the database tables</p>
 <table>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/login</code></strong></td>
-    <td>Login user credentials and retrieve its respective token</td>
+    <td width="50%"><strong><code>/api/login</code></strong></td>
+    <td width="40%">Login user credentials and retrieve its respective token</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/guest</code></strong></td>
-    <td>Retrieve token as guest</td>
+    <td width="50%"><strong><code>/api/guest</code></strong></td>
+    <td width="40%">Retrieve token as guest</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td width="60%"><strong><code>/api/register</code></strong></td>
-    <td>Create new user in a form of registration form</td>
+    <td width="50%"><strong><code>/api/register</code></strong></td>
+    <td width="40%">Create new user in a form of registration form</td>
   </tr>
 </table>
 <br/>
@@ -69,28 +69,28 @@ Once the program starts, it will automatically created the database tables</p>
 <table>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/users</code></strong></td>
-    <td>Retrieve all users. Admin access only</td>
+    <td width="50%"><strong><code>/api/users</code></strong></td>
+    <td width="40%">Retrieve all users. Admin access only</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
-    <td>Retrieve specific user. Admin access only</td>
+    <td width="50%"><strong><code>/api/users/{id}</code></strong></td>
+    <td width="40%">Retrieve specific user. Admin access only</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td width="60%"><strong><code>/api/users</code></strong></td>
-    <td>Create new user by admin. Admin access only</td>
+    <td width="50%"><strong><code>/api/users</code></strong></td>
+    <td width="40%">Create new user by admin. Admin access only</td>
   </tr>
   <tr>
     <td>PUT</td>
-    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
-    <td>Update specific user</td>
+    <td width="50%"><strong><code>/api/users/{id}</code></strong></td>
+    <td width="40%">Update specific user</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
-    <td>Delete specific user</td>
+    <td width="50%"><strong><code>/api/users/{id}</code></strong></td>
+    <td width="40%">Delete specific user</td>
   </tr>
 </table>
 <br/>
@@ -99,27 +99,27 @@ Once the program starts, it will automatically created the database tables</p>
 <table>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/events</code></strong></td>
-    <td>Retrieve all events</td>
+    <td width="50%"><strong><code>/api/events</code></strong></td>
+    <td width="40%">Retrieve all events</td>
   </tr>
   <tr>
     <td>GET</td>
-    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
-    <td>Retrieve specific event</td>
+    <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
+    <td width="40%">Retrieve specific event</td>
   </tr>
   <tr>
     <td>POST</td>
-    <td width="60%"><strong><code>/api/events</code></strong></td>
-    <td>Create new event</td>
+    <td width="50%"><strong><code>/api/events</code></strong></td>
+    <td width="40%">Create new event</td>
   </tr>
   <tr>
     <td>PUT</td>
-    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
-    <td>Update specific event</td>
+    <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
+    <td width="40%">Update specific event</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
-    <td>Delete specific event</td>
+    <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
+    <td width="40%">Delete specific event</td>
   </tr>
 </table>
