@@ -85,12 +85,42 @@ Once the program starts, it will automatically created the database tables</p>
   <tr>
     <td>PUT</td>
     <td width="50%"><strong><code>/api/users/{id}</code></strong></td>
-    <td width="40%">Update specific user</td>
+    <td width="40%">Update specific user. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/users/{id}</code></strong></td>
-    <td width="40%">Delete specific user</td>
+    <td width="40%">Delete specific user. Admin access only</td>
+  </tr>
+</table>
+<br/>
+
+<h4>User Roles</h4>
+<table>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/roles</code></strong></td>
+    <td width="40%">Retrieve all user roles. Admin access only</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/roles/{id}</code></strong></td>
+    <td width="40%">Retrieve specific user role. Admin access only</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/roles</code></strong></td>
+    <td width="40%">Create new user roles. Admin access only</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td width="50%"><strong><code>/api/roles/{id}</code></strong></td>
+    <td width="40%">Update specific user roles. Admin access only</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="50%"><strong><code>/api/roles/{id}</code></strong></td>
+    <td width="40%">Delete specific user roles. Admin access only</td>
   </tr>
 </table>
 <br/>
@@ -120,42 +150,42 @@ Once the program starts, it will automatically created the database tables</p>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events</code></strong></td>
-    <td width="40%">Create new event</td>
+    <td width="40%">Create new event. Admin access only</td>
   </tr>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events/{id}/add-judge</code></strong></td>
-    <td width="40%">Insert new judge assigned to the specific event</td>
+    <td width="40%">Insert new judge assigned to the specific event. Admin access only</td>
   </tr>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events/{id}/add-participant</code></strong></td>
-    <td width="40%">Insert new participant assigned to the specific event</td>
+    <td width="40%">Insert new participant assigned to the specific event. Admin access only</td>
   </tr>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events/delete</code></strong></td>
-    <td width="40%">Delete multiple events</td>
+    <td width="40%">Delete multiple events. Admin access only</td>
   </tr>
   <tr>
     <td>PUT</td>
     <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
-    <td width="40%">Update specific event</td>
+    <td width="40%">Update specific event. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/events/{id}</code></strong></td>
-    <td width="40%">Delete specific event</td>
+    <td width="40%">Delete specific event. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/events/{id}/delete-judge/{judge_id}</code></strong></td>
-    <td width="40%">Delete a specific assigned judge from the specific event</td>
+    <td width="40%">Delete a specific assigned judge from the specific event. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/events/{id}/delete-participant/{participant_id}</code></strong></td>
-    <td width="40%">Delete a specific assigned participant from the specific event</td>
+    <td width="40%">Delete a specific assigned participant from the specific event. Admin access only</td>
   </tr>
 </table>
 <br/>
@@ -175,17 +205,17 @@ Once the program starts, it will automatically created the database tables</p>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/events/{id}/criterias</code></strong></td>
-    <td width="40%">Create new criteria to the specific event</td>
+    <td width="40%">Create new criteria to the specific event. Admin access only</td>
   </tr>
   <tr>
     <td>PUT</td>
     <td width="50%"><strong><code>/api/events/{id}/criterias/{criteria_id}</code></strong></td>
-    <td width="40%">Update specific criteria from the specific event</td>
+    <td width="40%">Update specific criteria from the specific event. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
     <td width="50%"><strong><code>/api/events/{id}/criterias/{criteria_id}</code></strong></td>
-    <td width="40%">Delete specific criteria from the specific event</td>
+    <td width="40%">Delete specific criteria from the specific event. Admin access only</td>
   </tr>
 </table>
 <br/>
@@ -205,11 +235,43 @@ Once the program starts, it will automatically created the database tables</p>
   <tr>
     <td>POST</td>
     <td width="50%"><strong><code>/api/judges</code></strong></td>
-    <td width="40%">Set user into a judge</td>
+    <td width="40%">Set user into a judge. Admin access only</td>
   </tr>
   <tr>
     <td>DELETE</td>
-    <td style="width: 50% !important;"><strong><code>/api/judges/{id}</code></strong></td>
-    <td style="width: 40% !important;">Delete specific judge</td>
+    <td width="50%"><strong><code>/api/judges/{id}</code></strong></td>
+    <td width="40%">Delete specific judge. Admin access only</td>
   </tr>
 </table>
+<br/>
+
+<h4>Participants></h4>
+<table>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/participants</code></strong></td>
+    <td width="40%">Retrieve all participants</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/participants/{id}</code></strong></td>
+    <td width="40%">Retrieve a specific participant</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/participants</code></strong></td>
+    <td width="40%">Create new participant. Admin access only</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td width="50%"><strong><code>/api/participants/{id}</code></strong></td>
+    <td width="40%">Update specific participant. Admin access only</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="50%"><strong><code>/api/participants/{id}</code></strong></td>
+    <td width="40%">Delete specific participant. Admin access only</td>
+  </tr>
+</table>
+<br/>
+
