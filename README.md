@@ -188,3 +188,28 @@ Once the program starts, it will automatically created the database tables</p>
     <td width="40%">Delete specific criteria from the specific event</td>
   </tr>
 </table>
+<br/>
+
+<h4>Judges</h4>
+<table>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/judges</code></strong></td>
+    <td width="40%">Retrieve all judges</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="50%"><strong><code>/api/judges/{id}</code></strong></td>
+    <td width="40%">Retrieve a specific judge</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="50%"><strong><code>/api/judges</code></strong></td>
+    <td width="40%">Set user into a judge</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td style="width: 50% !important;"><strong><code>/api/judges/{id}</code></strong></td>
+    <td style="width: 40% !important;">Delete specific judge</td>
+  </tr>
+</table>
