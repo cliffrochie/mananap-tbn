@@ -44,42 +44,82 @@ Once the program starts, it will automatically created the database tables</p>
 <h3>Usage</h3>
 <p>Below are the end-points of the RESTFul API:</p>
 <br/>
-<h4>Users</h4>
+
+<h4>Authentication</h4>
 <table>
   <tr>
-    <td width="60%"><strong><code>GET -- /api/login</code></strong></td>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/login</code></strong></td>
     <td>Login user credentials and retrieve its respective token</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>GET -- /api/guest</code></strong></td>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/guest</code></strong></td>
     <td>Retrieve token as guest</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>POST -- /api/register</code></strong></td>
+    <td>POST</td>
+    <td width="60%"><strong><code>/api/register</code></strong></td>
     <td>Create new user in a form of registration form</td>
   </tr>
+</table>
+<br/>
+
+<h4>Users</h4>
+<table>
   <tr>
-    <td width="60%"><strong><code>GET -- /api/users</code></strong></td>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/users</code></strong></td>
     <td>Retrieve all users. Admin access only</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>GET -- /api/users/{id}</code></strong></td>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
     <td>Retrieve specific user. Admin access only</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>POST -- /api/users</code></strong></td>
+    <td>POST</td>
+    <td width="60%"><strong><code>/api/users</code></strong></td>
     <td>Create new user by admin. Admin access only</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>PUT -- /api/users/{id}</code></strong></td>
+    <td>PUT</td>
+    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
     <td>Update specific user</td>
   </tr>
   <tr>
-    <td width="60%"><strong><code>DELETE -- /api/users/{id}</code></strong></td>
+    <td>DELETE</td>
+    <td width="60%"><strong><code>/api/users/{id}</code></strong></td>
     <td>Delete specific user</td>
   </tr>
+</table>
+<br/>
+
+<h4>Events</h4>
+<table>
   <tr>
-    <td width="60%"><strong><code>GET -- /api/login</code></strong></td>
-    <td>Login user credentials</td>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/events</code></strong></td>
+    <td>Retrieve all events</td>
+  </tr>
+  <tr>
+    <td>GET</td>
+    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
+    <td>Retrieve specific event</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td width="60%"><strong><code>/api/events</code></strong></td>
+    <td>Create new event</td>
+  </tr>
+  <tr>
+    <td>PUT</td>
+    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
+    <td>Update specific event</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td width="60%"><strong><code>/api/events/{id}</code></strong></td>
+    <td>Delete specific event</td>
   </tr>
 </table>
